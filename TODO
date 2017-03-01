@@ -1,3 +1,14 @@
+Plan:
+- ukladat vysledky lokalizacie
+- vyberanie parametrov pohodlnejsie
+	- doplnenie popiskov
+	- aby to nebolo tak vysoke
+- vytvorit niekolko trackerov a porovnat - BAKALARKA
+	- moznost ich menit za behu programu
+	- aby mal uzivatel si moznost vybrat?
+- ulozenie zaznamu a opatovne pouzitie (mozno)
+
+
 - most importantly create reliable object tracker
 - save localization results to file and not stderr/stdout
 - 3rd calibration step to obtain absolute position of cameras and orientation
