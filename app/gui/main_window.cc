@@ -55,6 +55,7 @@ MainWindow::MainWindow(Application *application, QWidget *parent)
           application_, &Application::Initialize);
 
   SetupMenu();
+  SetupTrackingMenu();
 
   /* Initialization */
   SetupPipeline();
@@ -241,6 +242,13 @@ void MainWindow::ParametersSave() {
   application_->parameters_storage()->SaveToFile(filename);
 }
 
+void MainWindow::SetTracker() {
+
+}
+
+
+
+
 void MainWindow::SetupCameras() {
   cameras_setup_dialog_->SetProviders(application_->ScanCameraProviders());
   cameras_setup_dialog_->show();
@@ -288,6 +296,17 @@ void MainWindow::SetupStatusBar() {
   statusBar()->addWidget(calibration_status_);
 }
 
+void MainWindow::SetupTrackingMenu() {
+
+    trackingOptions = new QActionGroup(this);
+    trackingOptions->addAction(ui_->actionCircle_Tracker);
+    trackingOptions->addAction(ui_->actionHistogram_Tracker);
+    trackingOptions->addAction(ui_->actionOpenTLD_Tracker);
+    trackingOptions->addAction(ui_->actionTemplate_Tracker);
+    ui_->actionOpenTLD_Tracker->setChecked(true);
+
+}
+
 void MainWindow::SetupMenu() {
   action_group_distortion_ = new QActionGroup(this);
   ui_->action_distortion_ignore->setActionGroup(action_group_distortion_);
@@ -326,6 +345,17 @@ void MainWindow::SetupMenu() {
           this, &MainWindow::SceneShowCameras);
   connect(ui_->action_scene_clear_trajectory, &QAction::triggered,
           this, &MainWindow::SceneClearTrajectory);
+
+  // Tracking menu
+  connect(ui_->actionCircle_Tracker, &QAction::triggered,
+          this, &MainWindow::SetTracker);
+  connect(ui_->actionHistogram_Tracker, &QAction::triggered,
+          this, &MainWindow::SetTracker);
+  connect(ui_->actionTemplate_Tracker, &QAction::triggered,
+          this, &MainWindow::SetTracker);
+  connect(ui_->actionOpenTLD_Tracker, &QAction::triggered,
+          this, &MainWindow::SetTracker);
+
 
   /* Synchronize stateful menus */
   SceneShowCameras();
